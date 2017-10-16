@@ -175,7 +175,15 @@ update: function(du) {
 
       for (var i = 0; i < aCategory.length; ++i) {
 
+        if(aCategory[i] === this.KILL_ME_NOW){
+          this._bullets.splice(i,1);
+        }
+        else{
+
         aCategory[i].update(du);
+        }
+
+
 
             }
         }

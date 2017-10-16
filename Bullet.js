@@ -43,8 +43,8 @@ Bullet.prototype.update = function (du) {
     this.cx += this.velX * du;
     this.cy += this.velY * du;
     this.wrapPosition();
-    Bullet.prototype.lifeSpan--;
-    console.log(Bullet.prototype.lifeSpan);
+    this.lifeSpan-=du
+    if(this.lifeSpan < 0){return entityManager.KILL_ME_NOW}
 
 };
 
@@ -75,11 +75,19 @@ Bullet.prototype.render = function (ctx) {
 
 
 
-    // ..YOUR STUFF..
 
+
+
+    ctx.save();
+    if(this.lifeSpan <= fadeThresh){
+      ctx.globalAlpha = this.lifeSpan/fadeThresh;
+    }
     g_sprites.bullet.drawWrappedCentredAt(
 	ctx, this.cx, this.cy, this.rotation
     );
+
+  ctx.restore();
+
 
     // ..YOUR STUFF..
 
